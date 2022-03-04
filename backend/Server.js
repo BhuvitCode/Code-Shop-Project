@@ -3,13 +3,16 @@ const dotenv = require('dotenv');
 dotenv.config({path: './config.env'});
 const ConnectToMongoDb = require('./Database/Database');
 ConnectToMongoDb();
+// const cors = require('cors');
 const app = express();
-const Product = require('./Routes/ProductRoutes');
 
-app.use(express.json());    
+// app.use(cors())
+app.use(express.json());       
 
 
-app.use('api/v1/ProductApi', Product);
-app.listen(process.env.PORT, () => {
-    console.log('Server is running on port 5000');
+app.use('/api/v1/ProductApi',  require('./Routes/ProductRoutes'));
+// app.use('/api/v1/ProductApi',  require('./Routes/ProductRoutes'));
+
+app.listen(8000, () => {
+    console.log('Server is running on port 8000');
 });

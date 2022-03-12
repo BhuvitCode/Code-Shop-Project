@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
 // const { body, validationResult } = require('express-validator');
-const { CreateProduct,GetAllProducts } = require('../Controllers/ProductControllers');
+const { CreateProduct,GetAllProducts,GetFullProductDetailsById,UpdateProduct,DeleteProduct,CreateCategory } = require('../Controllers/ProductControllers');
 
-router.route('/CreateProducts').post(CreateProduct);
-router.route('/GetAllProducts').get(GetAllProducts);
+router.route('/CreateProducts/:CategoryId').post(CreateProduct);
+router.route('/GetAllProducts/:CatSlug').get(GetAllProducts);
+router.route('/GetAllProductsFullDetails/:ProductId').get(GetFullProductDetailsById);
+router.route('/UpdateProduct/:product_id').patch(UpdateProduct);
+router.route('/DeleteProduct/:product_id').delete(DeleteProduct);
+router.route('/CreateProductCategory').post(CreateCategory);
 
-
-// router.get('/start', async (req,res)=>{
-//     res.send('Hello');
-// })
 
 module.exports = router

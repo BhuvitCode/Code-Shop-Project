@@ -1,8 +1,10 @@
-// const express = require('express');
-// const expressValidator = require('express-validator');
+const express = require('express');
+const expressValidator = require('express-validator');
 const ProductModal = require('../Models/AddProduct');
 const CategoryModel = require('../Models/CategoryModel');
-
+const Sub_Category_Model = require('../Models/Sub-Category');
+const ReviewMongooseModel = require('../Models/ReiviewModel');
+const ColorMongooseModel = require('../Models/ColorModel');
 exports.GetAllProducts = async (req, res) => {
     const GetAllProducts = await ProductModal.find({product_Category: req.params.CatSlug}).select(
         "product_name product_Desc product_Category product_price  product_image_url"
@@ -103,4 +105,77 @@ exports.CreateCategory = async (req, res) => {
         })
     }
 
+}
+
+
+exports.GetAllCategories = async (req, res) => {
+    const GetAllCategories = await CategoryModel.find({});
+    res.json(GetAllCategories);
+}
+
+
+exports.CreateSubCategory = async (req, res) => {
+    const { Sub_Category_Name } = req.body;
+    const Category_Name = req.params.CategorySlug
+    const AddSubCategory = await new Sub_Category_Model({
+        Sub_Category_Name,
+        Category_Name
+    });
+    const SaveSubCategory = await AddSubCategory.save();
+    res.json(SaveSubCategory);
+
+}
+
+
+exports.GetAllSubCategories = async (req, res) => {
+    const GetAllSubCategoriesByCategory = await Sub_Category_Model.find({Category_Name: req.params.CategorySlugId});
+    res.json(GetAllSubCategoriesByCategory);
+}
+
+exports.SumbitReview = async (req,res)=>{
+    
+    // const errors = validationResult(req);
+    // if(!errors.isEmpty()){
+    //     return res.status(422).json({errors: errors.array()});
+    // }
+
+    const {review_title,review_desc,product_overall_experience,product_rating} = req.body;
+
+    const GetProductIdByParams = req.params.ProductId;
+
+    const AddReview = new ReviewMongooseModel({
+        review_title,
+        review_desc,
+        product_overall_experience,
+        product_rating,
+        product_id:GetProductIdByParams
+    });
+
+    const SaveReview = await AddReview.save();
+
+    res.json(SaveReview);
+}
+
+exports.GetAllReviewsOfAProduct = async (req,res)=>{
+    const GetAllReviews = await ReviewMongooseModel.find({product_id: req.params.ProductIdByParam});
+    res.json(GetAllReviews);
+}
+
+exports.AddAColor = async (req,res)=>{
+    const {color_name} = req.body;
+    const ProductId = req.params.ProductIdentifier;
+    const AddColor = new ColorMongooseModel({
+        color_name,ProductId
+    });
+
+    const SaveColor = await AddColor.save();
+
+    res.json(SaveColor);
+}
+
+
+exports.GetColotsByProductId = async (req,res)=>{
+    const GetAllColors = await ColorMongooseModel.find({ProductId: req.params.product_id_by_param});
+
+    res.json(GetAllColors);
 }

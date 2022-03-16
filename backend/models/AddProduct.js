@@ -29,7 +29,7 @@ const ProductSchema = new Schema({
     },
 
     product_Owned_By_Company_Name: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     },
 

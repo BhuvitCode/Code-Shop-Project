@@ -5,6 +5,7 @@ const CategoryModel = require('../Models/CategoryModel');
 const Sub_Category_Model = require('../Models/Sub-Category');
 const ReviewMongooseModel = require('../Models/ReiviewModel');
 const ColorMongooseModel = require('../Models/ColorModel');
+const WishlistMongooseModel = require('../Models/WishlistModel');
 exports.GetAllProducts = async (req, res) => {
     const GetAllProducts = await ProductModal.find({product_Category: req.params.CatSlug}).select(
         "product_name product_Desc product_Category product_price  product_image_url"
@@ -26,8 +27,10 @@ exports.CreateProduct = async (req, res, next) => {
     const product_Category = req.params.CategoryId;
     // const product_Category = await CategoryModel.findById(CatIdExtract).select("-_id");
     try {
+    // console.log(req.OrgInfo.Organization_Id)
+
         const AddProduct = await new ProductModal({
-            product_name,product_Desc,product_Category,product_color,product_price,product_stock,product_Owned_By_Company_Name,product_image_url
+               product_name,product_Desc,product_Category,product_color,product_price,product_stock,product_Owned_By_Company_Name:req.OrgInfo.Organization_Id,product_image_url
         });
 
         const SaveProduct = await AddProduct.save();
@@ -50,22 +53,37 @@ exports.GetFullProductDetailsById = async (req,res)=>{
 
 exports.UpdateProduct = async (req,res)=>{
 
+
     try {
-        const {product_name,product_Desc,product_color,product_Category,product_price,product_stock,product_Owned_By_Company_Name,product_image_url} = req.body;
-    const UpdateProduct = await ProductModal.findByIdAndUpdate(req.params.product_id,{
-        $set:{
-            product_name:product_name,product_Desc:product_Desc,product_color:product_color,product_Category:product_Category,product_price:product_price,product_stock:product_stock,product_Owned_By_Company_Name:product_Owned_By_Company_Name,product_image_url:product_image_url
+        const {product_name,product_Desc,product_color,product_Category,product_price,product_stock,product_image_url} = req.body;
+
+        const FindProductToUpdate = await ProductModal.findById(req.params.product_id)
+
+        if(FindProductToUpdate.product_Owned_By_Company_Name.toString() !== req.OrgInfo.Organization_Id){
+            res.status(401).json({"Not Allowed": "Not Eligible By You"})
         }
-    });
-    res.json(UpdateProduct);
+        else{
+            const UpdateProduct = await ProductModal.findByIdAndUpdate(req.params.product_id,{
+                $set:{
+                    product_name:product_name,product_Desc:product_Desc,product_color:product_color,product_Category:product_Category,product_price:product_price,product_stock:product_stock,product_image_url:product_image_url
+                }
+            });
+            res.json(UpdateProduct);
+        }
     } catch (error) {
         console.log(error);
     }
+
     
 }
 
 exports.DeleteProduct = async  (req,res)=>{
     try {
+
+        if(FindProductToUpdate.product_Owned_By_Company_Name != req.OrgInfo.Organization_Id){
+            res.status(401).json({"Not Allowed": "Not Eligible By You"})
+        }
+
         const DeleteProductInDB = await ProductModal.findByIdAndDelete(req.params.product_id);
 
         if(!DeleteProductInDB){
@@ -179,3 +197,6 @@ exports.GetColotsByProductId = async (req,res)=>{
 
     res.json(GetAllColors);
 }
+
+// WishListFeatureTodo
+// exports.AddTowishList

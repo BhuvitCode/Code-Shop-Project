@@ -12,6 +12,7 @@ app.use(express.json());
 
 app.use('/api/v1/ProductApi',  require('./Routes/ProductRoutes'));
 app.use('/api/v1/OrganizationApi',  require('./Routes/OrganizationAccountRoutes'));
+app.use('/api/v1/Authentication',  require('./Routes/UserAccountRoutes'));
 
 app.listen(8000, () => {
     console.log('Server is running on port 8000');

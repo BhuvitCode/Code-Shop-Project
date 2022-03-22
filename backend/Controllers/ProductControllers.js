@@ -199,4 +199,14 @@ exports.GetColotsByProductId = async (req,res)=>{
 }
 
 // WishListFeatureTodo
-// exports.AddTowishList
+exports.AddToWishList = async (req,res)=>{
+    const GetProductId = req.params.ProductIdPrameter;
+
+    const AddToWishList = new WishlistMongooseModel({
+        User_Name:req.AccountInfo.User_Id,
+        Product_Identfier:GetProductId
+    })
+
+    const SaveAddToWishList = await AddToWishList.save();
+    res.json(SaveAddToWishList);
+}

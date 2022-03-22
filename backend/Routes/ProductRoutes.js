@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // const { body, validationResult } = require('express-validator');
-const { CreateProduct,GetAllProducts,GetFullProductDetailsById,UpdateProduct,DeleteProduct,CreateCategory,CreateSubCategory,GetAllSubCategories,SumbitReview,GetAllReviewsOfAProduct,AddAColor,GetColotsByProductId } = require('../Controllers/ProductControllers');
+const { CreateProduct,GetAllProducts,GetFullProductDetailsById,UpdateProduct,DeleteProduct,CreateCategory,CreateSubCategory,GetAllSubCategories,SumbitReview,GetAllReviewsOfAProduct,AddAColor,GetColotsByProductId,AddToWishList } = require('../Controllers/ProductControllers');
 // const FetchOrgInfoUsingToken = require('../middlewares/FetchOrgInfo')
 const FetchUserInfoUsingAuthToken = require('../middlewares/UserInfo');
 
@@ -27,6 +27,9 @@ router.route('/OrderProducts/:ProductName').post(FetchUserInfoUsingAuthToken,Fet
 router.route('/GetProductsOFTheOrganization').post(FetchOrgInfoUsingToken,GetAllProductsToDelieverByTheBrand);
 
 router.route('/UpdateTheProductStatus/:ProductNameIdentfier').patch(FetchOrgInfoUsingToken,UpdateProductStatus);
+
+
+router.route('/AddToWishList/:ProductIdPrameter').post(FetchUserInfoUsingAuthToken,AddToWishList);
 
 // UpdateProductStatus
 module.exports = router

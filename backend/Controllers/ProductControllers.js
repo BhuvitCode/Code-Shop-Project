@@ -201,12 +201,30 @@ exports.GetColotsByProductId = async (req,res)=>{
 // WishListFeatureTodo
 exports.AddToWishList = async (req,res)=>{
     const GetProductId = req.params.ProductIdPrameter;
+    
+    const FindProductDetails = await ProductModal.findById(GetProductId).select('product_name');
 
     const AddToWishList = new WishlistMongooseModel({
         User_Name:req.AccountInfo.User_Id,
-        Product_Identfier:GetProductId
+        Product_Identfier:GetProductId,
+        Product_Name:FindProductDetails.product_name,
+        Product_Price:req.body.Product_Price,
+        Product_Image_Url:req.body.Product_Image_Url,
+        Product_Stock:req.body.Product_Stock,
+        Product_Desc:req.body.Product_Desc,
     })
 
     const SaveAddToWishList = await AddToWishList.save();
     res.json(SaveAddToWishList);
+    
+}
+
+
+exports.GetWishListItems = async (req,res)=>{
+
+    // const GetProductInfo = req.params.ProductIdForInfo
+
+    const GetWishListItemsByUserId = await WishlistMongooseModel.find({User_Name: req.AccountInfo.User_Id});
+    
+    res.json(GetWishListItemsByUserId);
 }

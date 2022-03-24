@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // const { body, validationResult } = require('express-validator');
-const { CreateProduct,GetAllProducts,GetFullProductDetailsById,UpdateProduct,DeleteProduct,CreateCategory,CreateSubCategory,GetAllSubCategories,SumbitReview,GetAllReviewsOfAProduct,AddAColor,GetColotsByProductId,AddToWishList } = require('../Controllers/ProductControllers');
+const { CreateProduct,GetAllProducts,GetFullProductDetailsById,UpdateProduct,DeleteProduct,CreateCategory,CreateSubCategory,GetAllSubCategories,SumbitReview,GetAllReviewsOfAProduct,AddAColor,GetColotsByProductId,AddToWishList, GetWishListItems,GetAllCategories} = require('../Controllers/ProductControllers');
 // const FetchOrgInfoUsingToken = require('../middlewares/FetchOrgInfo')
 const FetchUserInfoUsingAuthToken = require('../middlewares/UserInfo');
 
@@ -13,6 +13,7 @@ const FetchOrgInfoUsingToken = require('../middlewares/FetchOrgInfo')
 router.route('/CreateProducts/:CategoryId').post(FetchOrgInfoUsingToken,CreateProduct);
 router.route('/GetAllProducts/:CatSlug').get(GetAllProducts);
 router.route('/CreateSubCategory/:CategorySlug').post(CreateSubCategory);
+router.route('/GetAllCategories').get(GetAllCategories)
 router.route('/GetAllSubCategoriesByCategore/:CategorySlugId').get(GetAllSubCategories);
 router.route('/GetAllProductsFullDetails/:ProductId').get(GetFullProductDetailsById);
 router.route('/UpdateProduct/:product_id').patch(FetchOrgInfoUsingToken,UpdateProduct);
@@ -30,6 +31,9 @@ router.route('/UpdateTheProductStatus/:ProductNameIdentfier').patch(FetchOrgInfo
 
 
 router.route('/AddToWishList/:ProductIdPrameter').post(FetchUserInfoUsingAuthToken,AddToWishList);
+
+router.route('/GetAllWishListItems').post(FetchUserInfoUsingAuthToken,GetWishListItems);
+
 
 // UpdateProductStatus
 module.exports = router

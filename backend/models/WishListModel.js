@@ -9,14 +9,35 @@ const WishListSchema = new Schema({
     },
 
     Product_Identfier:{
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true
     },
 
-    // TotalAmountOFAllTheProducts:{
-    //     type: Number,
-    //     required: true
-    // }
+    Product_Name:{
+        type: String,
+        required: true
+    },
+
+    Product_Price:{
+        type: Number,
+        required: true
+    },
+
+    Product_Image_Url:{
+        type: String,
+        required: true
+    },
+
+    Product_Stock:{
+        type: Number,
+        required: true
+    },
+
+    Product_Desc:{
+        type: String,
+        required: true
+    },
+
 })
 
 

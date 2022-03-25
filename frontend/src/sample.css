@@ -1,3 +1,7 @@
 .doge{
     background-color: dodgerblue;
 }
+
+.box-shadow{
+    box-shadow: -0px -0px 10px 1px grey;
+}

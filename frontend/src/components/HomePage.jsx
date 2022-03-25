@@ -22,7 +22,7 @@ const HomePage = () => {
 
         
             <div className="h-24 pl-10 mt-40 mb-40 max-w-2xl ml-10">
-                <h1 className='HomeHeading font-bold font-san'>Welcome To Code Shop</h1>
+                <h1 className='HomeHeading font-bold font-san text-2xl'>Welcome To Code Shop</h1>
                 <p className='ParaContent font-medium'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla harum voluptas expedita ullam voluptate aperiam quo quae sequi aliquid, facere sunt debitis consequuntur dolorum placeat mollitia ea illum sed eligendi error, accusantium eaque. Nulla, tempore aliquam aperiam est maiores vel harum minima delectus culpa, excepturi repellat.</p>
                 <div className="Home-Btns mt-3">
                     <button className='Home-Btn bg-black text-white rounded-3xl py-1 px-4 text-sm hover:bg-[#1e90ff] hover:text-black hover:border-2 hover:border-black'>Order Now</button>

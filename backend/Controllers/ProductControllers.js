@@ -127,8 +127,8 @@ exports.CreateCategory = async (req, res) => {
 
 
 exports.GetAllCategories = async (req, res) => {
-    const GetAllCategories = await CategoryModel.find({});
-    res.json(GetAllCategories);
+    const GetAllCategories2 = await CategoryModel.find({});
+    res.json(GetAllCategories2);
 }
 
 

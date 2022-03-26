@@ -12,6 +12,8 @@ import SubCategorie from './components/SubCategorie';
 import ProductState from './context/ProductState';
 import RetrieveCategoriesProps
  from './components/RetrieveApiProps/RetrieveCategoriesProps';
+
+import RetrieveSubCategoriesProps from './components/RetrieveApiProps/RetrieveSubCategoriesProps';
 function App() {
   return (
     <>
@@ -26,8 +28,9 @@ function App() {
               <Footer/>
           </Route>
 
-          <Route exact path="/Sub-Categories">
-              <SubCategorie/>
+          <Route exact path="/Sub-Categories/:CategoryId">
+              {/* <SubCategorie/> */}
+              <RetrieveSubCategoriesProps></RetrieveSubCategoriesProps>
           </Route>
       </Switch>
     </ProductState>

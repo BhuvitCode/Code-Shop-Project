@@ -21,15 +21,15 @@ const Category = (props) => {
             <div className="Category-Container flex flex-wrap justify-center items-center mt-16">
                 <div className="Categorie1 w-72 h-72 bg-white flex-col shadow-lg justify-center mt-12 mx-10">
                 <img src={img} className='w-32 ml-24' alt="" />
-                    <h1 className="CategoryName text-xl mt-10 ml-3 font-bold">{CategoriesArray.category_name}</h1>
+                    <h1 className="CategoryName text-xl mt-10 ml-3 font-bold" alt='img'>{CategoriesArray.category_name}</h1>
 
                     <p className="CategoryName text-sm ml-3 font-bold">Find Your Favrouite Electronic Itmes With Discount Like Phones,Laptops,Tablets etc.Here</p>
 
-                    <Link to="/Sub-Categories"><button className='px-3 bg-black mt-4 ml-3 rounded-3xl text-white py-1'>View Products</button></Link>
+                    <Link to={`/Sub-Categories/${CategoriesArray.category_name}`}><button className='px-3 bg-black mt-4 ml-3 rounded-3xl text-white py-1'>View Products</button></Link>
                 </div>
 
                 <div className="Categorie1 w-72 h-72 bg-white flex-col shadow-lg justify-center mt-12 mx-10">
-                <img src={img5} className='w-32 ml-24' alt="" />
+                <img src={img5} className='w-32 ml-24' alt='img' />
                     <h1 className="CategoryName text-xl mt-10 ml-3 font-bold">Furniture</h1>
 
                     <p className="CategoryName text-sm ml-3 font-bold">Find Your Favrouite Electronic Itmes With Discount Like Phones,Laptops,Tablets etc.Here</p>
@@ -38,7 +38,7 @@ const Category = (props) => {
                 </div>
 
                 <div className="Categorie1 w-72 h-72 bg-white flex-col shadow-lg justify-center mt-12 mx-10">
-                <img src={img6} className='w-32 ml-24' alt="" />
+                <img src={img6} className='w-32 ml-24' alt='img' />
                     <h1 className="CategoryName text-xl mt-10 ml-3 font-bold">Clothing</h1>
 
                     <p className="CategoryName text-sm ml-3 font-bold">Find Your Favrouite Electronic Itmes With Discount Like Phones,Laptops,Tablets etc.Here</p>
@@ -47,7 +47,7 @@ const Category = (props) => {
                 </div>
 
                 <div className="Categorie1 w-72 h-72 bg-white flex-col shadow-lg justify-center mt-12 mx-10">
-                <img src={img7} className='w-32 ml-24' alt="" />
+                <img src={img7} className='w-32 ml-24' alt='img' />
                     <h1 className="CategoryName text-xl mt-10 ml-3 font-bold">Home Appliances</h1>
 
                     <p className="CategoryName text-sm ml-3 font-bold">Find Your Favrouite Electronic Itmes With Discount Like Phones,Laptops,Tablets etc.Here</p>
@@ -56,7 +56,7 @@ const Category = (props) => {
                 </div>
 
                 <div className="Categorie1 w-72 h-72 bg-white flex-col shadow-lg justify-center mt-12 mx-10">
-                <img src={img8} className='w-32 ml-24' alt="" />
+                <img src={img8} className='w-32 ml-24' alt='img' />
                     <h1 className="CategoryName text-xl mt-10 ml-3 font-bold">Books</h1>
 
                     <p className="CategoryName text-sm ml-3 font-bold">Find Your Favrouite Electronic Itmes With Discount Like Phones,Laptops,Tablets etc.Here</p>
@@ -65,7 +65,7 @@ const Category = (props) => {
                 </div>
 
                 <div className="Categorie1 w-72 h-72 bg-white flex-col shadow-lg justify-center mt-12 mx-10">
-                <img src={img9} className='w-32 ml-24' alt="" />
+                <img src={img9} className='w-32 ml-24' alt='img' />
                     <h1 className="CategoryName text-xl mt-10 ml-3 font-bold">Groceries</h1>
 
                     <p className="CategoryName text-sm ml-3 font-bold">Find Your Favrouite Electronic Itmes With Discount Like Phones,Laptops,Tablets etc.Here</p>

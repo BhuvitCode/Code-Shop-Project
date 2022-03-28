@@ -14,6 +14,9 @@ import RetrieveCategoriesProps
  from './components/RetrieveApiProps/RetrieveCategoriesProps';
 
 import RetrieveSubCategoriesProps from './components/RetrieveApiProps/RetrieveSubCategoriesProps';
+
+import DisplayProducts from './components/DisplayProducts';
+import RetrieveProductsProps from './components/RetrieveApiProps/RetrieveProductsProps';
 function App() {
   return (
     <>
@@ -31,6 +34,10 @@ function App() {
           <Route exact path="/Sub-Categories/:CategoryId">
               {/* <SubCategorie/> */}
               <RetrieveSubCategoriesProps></RetrieveSubCategoriesProps>
+          </Route>
+
+          <Route exact path="/DisplayProducts/:CategoryIdentifier/:SubCat">
+              <RetrieveProductsProps/>
           </Route>
       </Switch>
     </ProductState>

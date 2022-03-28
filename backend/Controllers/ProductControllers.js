@@ -6,9 +6,10 @@ const Sub_Category_Model = require('../Models/Sub-Category');
 const ReviewMongooseModel = require('../Models/ReiviewModel');
 const ColorMongooseModel = require('../Models/ColorModel');
 const WishlistMongooseModel = require('../Models/WishlistModel');
+// const OrganizationMongooseModel = require('../Models/OrganizationModel');
 exports.GetAllProducts = async (req, res) => {
-    const GetAllProducts = await ProductModal.find({product_Category: req.params.CatSlug}).select(
-        "product_name product_Desc product_Category product_price  product_image_url"
+    const GetAllProducts = await ProductModal.find({product_Category: req.params.CatSlug, product_sub_category:req.params.SubCategorySlug}).select(
+        "product_name product_Desc product_Category product_price  product_image_url product_Owned_By_Company_Name"
     );
 
     res.json(GetAllProducts);
@@ -16,21 +17,16 @@ exports.GetAllProducts = async (req, res) => {
 
 
 exports.CreateProduct = async (req, res, next) => {
-    const {product_name,product_Desc,product_color,product_price,product_stock,product_Owned_By_Company_Name,product_image_url} = req.body;
-
-    // const errors = validationResult(req);
-
-    // if(!errors.isEmpty()){
-    //     return res.status(422).json({errors: errors.array()});
-    // }
+    const {product_name,product_Desc,product_color,product_price,product_stock,product_image_url} = req.body;
 
     const product_Category = req.params.CategoryId;
-    // const product_Category = await CategoryModel.findById(CatIdExtract).select("-_id");
+    
+    // const FindOrganiztionName = await OrganizationMongooseModel.findOne({_id:req.OrgInfo.Organization_Id});
+
     try {
-    // console.log(req.OrgInfo.Organization_Id)
 
         const AddProduct = await new ProductModal({
-               product_name,product_Desc,product_Category,product_color,product_price,product_stock,product_Owned_By_Company_Name:req.OrgInfo.Organization_Id,product_image_url
+               product_name,product_Desc,product_Category,product_color,product_price,product_stock,product_Owned_By_Company_Name:req.OrgInfo.Organization_Name,product_image_url,product_sub_category:req.params.SubCategoryId
         });
 
         const SaveProduct = await AddProduct.save();

@@ -29,11 +29,16 @@ const ProductSchema = new Schema({
     },
 
     product_Owned_By_Company_Name: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true
     },
 
     product_image_url: {
+        type: String,
+        required: true
+    },
+
+    product_sub_category:{
         type: String,
         required: true
     }

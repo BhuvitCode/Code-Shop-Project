@@ -5,6 +5,7 @@ const JWT_SIGNATURE = 'BhuvitIsPro$%#$%#$%#$5rte534Hac46$%$#Ker'
 const Jwt = require("jsonwebtoken")
 const FetchOrgInfoUsingToken = require('../middlewares/FetchOrgInfo')
 
+
 exports.CreateAOrganization = async (req, res) => {
 
     const { Oraganization_Name,Oraganization_Email,Oraganization_Helpline_PhoneNumber,Oraganization_HeadQuater_Address,Organization_Founder_Name,Organization_Password, Organization_Description,ConfirmPassword } = req.body
@@ -27,7 +28,8 @@ exports.CreateAOrganization = async (req, res) => {
         const OrganizationData = {
             // Organization_Info:CreateOrganization.id
             Organization_Info:{
-                Organization_Id:CreateOrganization.id
+                Organization_Id:CreateOrganization.id,
+                Organization_Name:CreateOrganization.Oraganization_Name
             }
         }
 
@@ -61,7 +63,8 @@ exports.LoginOrganizationAccount = async (req, res) => {
     else{
         const OrganizationData = {
             Organization_Info:{
-                Organization_Id:Organization.id
+                Organization_Id:Organization.id,
+                Organization_Name:Organization.Oraganization_Name
             }
         }
     

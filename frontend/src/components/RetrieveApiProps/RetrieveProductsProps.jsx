@@ -1,24 +1,24 @@
 import React, { useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import product_context from '../../context/ProductsContext';
-import DisplayProducts from '../DisplayProducts';
+import DisplaySpecificProduct from '../DisplaySpecificProduct';
 
 const RetrieveProductsProps = () => {
 
   const GetContext = useContext(product_context)
 
-const { CategoryIdentifier, SubCat } = useParams();
-const { Products, GetAlProductsBySubCateAndCat } = GetContext;
+const { productId } = useParams();
+const { GetProductSpecificDetails,SpecificProduct } = GetContext;
 
 
 useEffect(() => {
-  GetAlProductsBySubCateAndCat(CategoryIdentifier, SubCat);
+  GetProductSpecificDetails(productId);
 }, [])
 
   return (
     <>
-      {Products.map((ProductsArray) => {
-        return <DisplayProducts key={ProductsArray._id} ProductsArray={ProductsArray}></DisplayProducts>
+      {SpecificProduct.map((SpecificProductArray) => {
+        return <DisplaySpecificProduct key={SpecificProductArray._id} SpecificProductArray={SpecificProductArray}></DisplaySpecificProduct>
       })}
     </>
   )

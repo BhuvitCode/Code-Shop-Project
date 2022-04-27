@@ -73,6 +73,7 @@ router.post('/Login', async (req, res) => {
         const UserAuthToken = Jwt.sign(AccountData,JWT_SIGNATURE)
     
         res.json({UserAuthToken})
+        console.log({UserAuthToken})
     }
   
 })

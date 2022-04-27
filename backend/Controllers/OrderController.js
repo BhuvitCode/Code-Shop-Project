@@ -9,7 +9,7 @@ exports.PlaceOrder = async (req, res) => {
     UserId2 = req.AccountInfo.User_Id
 
     const GetDetailsOFUser = await UserAccountModel.findById(UserId2).select('-password')
-    OrganizationId = req.OrgInfo.Organization_Id
+    // OrganizationId = req.OrgInfo.Organization_Id
 
     
     const CreateOrder = await new UserOrderPlacedModel({
@@ -22,9 +22,11 @@ exports.PlaceOrder = async (req, res) => {
         NameOFTheState: GetDetailsOFUser.State,
         NameOFTheCity: GetDetailsOFUser.City,
         AddressOfTheUser: GetDetailsOFUser.Address,
-        Product_Brand_Name: OrganizationId,
+        Product_Brand_Name: 'zyz',
         Product_Order_Status: 'Ordered',
-        colorOfTheProduct: req.body.colorOfTheProduct
+        colorOfTheProduct: req.body.colorOfTheProduct,
+        ModeOFPayment: req.body.mode
+        // colorOfTheProduct: req.body.colorOfTheProduct
     })
 
     const SaveCreateOrder = await CreateOrder.save();

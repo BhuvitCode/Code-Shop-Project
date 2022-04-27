@@ -13,6 +13,7 @@ const FetchOrgInfoUsingToken = require('../middlewares/FetchOrgInfo')
 
 // const GetAllProductsToDelieverByTheBrand = require('../Controllers/OrderProcessingController')
 router.route('/CreateProducts/:CategoryId/:SubCategoryId').post(FetchOrgInfoUsingToken,CreateProduct);
+
 router.route('/GetAllProducts/:CatSlug/:SubCategorySlug').get(GetAllProducts);
 router.route('/CreateSubCategory/:CategorySlug/:SubCategoryId').post(CreateSubCategory);
 router.route('/GetAllCategories').get(GetAllCategories)
@@ -25,7 +26,7 @@ router.route('/AddAReview/:ProductId').post(SumbitReview);
 router.route('/GetReviewsByProduct/:ProductIdByParam').get(GetAllReviewsOfAProduct);
 router.route('/AddColor/:ProductIdentifier').post(AddAColor);
 router.route('/GetColors/:product_id_by_param').get(GetColotsByProductId);
-router.route('/OrderProducts/:ProductName').post(FetchUserInfoUsingAuthToken,FetchOrgInfoUsingToken,PlaceOrder);
+router.route('/OrderProducts/:ProductName').post(FetchUserInfoUsingAuthToken,PlaceOrder);
 
 router.route('/GetProductsOFTheOrganization').post(FetchOrgInfoUsingToken,GetAllProductsToDelieverByTheBrand);
 

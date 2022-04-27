@@ -49,7 +49,7 @@ const UserOrderPlacedSchema = new Schema({
     },
 
     Product_Brand_Name:{
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true
     },
 

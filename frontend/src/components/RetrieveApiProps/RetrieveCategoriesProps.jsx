@@ -10,7 +10,7 @@ const RetrieveCategoriesProps = () => {
     
     useEffect(() => {
         GetCategories();
-    }, [])
+    })
 
 
 

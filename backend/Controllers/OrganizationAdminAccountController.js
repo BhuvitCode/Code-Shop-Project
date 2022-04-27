@@ -41,7 +41,9 @@ exports.CreateAOrganization = async (req, res) => {
 }
 
 exports.LoginOrganizationAccount = async (req, res) => {
-    const { Oraganization_Email,Organization_Password } = req.body
+    const { Oraganization_Email,Organization_Password,
+    
+    } = req.body
 
     const Organization = await OrganizationMongooseModel.findOne({ Oraganization_Email })
 
@@ -49,6 +51,13 @@ exports.LoginOrganizationAccount = async (req, res) => {
         res.json({
             success:false,
             message:"Organization Not Found"
+        })
+    }
+
+    if(Organization_Password !== ConfirmPassword){
+        res.json({
+            success:false,
+            message:"Password and Confirm Password are not same"
         })
     }
 

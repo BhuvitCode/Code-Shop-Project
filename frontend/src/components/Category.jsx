@@ -20,7 +20,7 @@ const Category = (props) => {
             {/* <p className='text-4xl font-bold text-center'>↓</p> */}
             <div className="Category-Container flex flex-wrap justify-center items-center mt-16">
                 <div className="Categorie1 w-72 h-72 bg-white flex-col shadow-lg justify-center mt-12 mx-10">
-                <img src={img} className='w-32 ml-24' alt="" />
+                <img src={"https://m.media-amazon.com/images/I/61b7BGoOACL._AC_SY200_.jpg"} className='w-32 ml-24' alt="" />
                     <h1 className="CategoryName text-xl mt-10 ml-3 font-bold" alt='img'>{CategoriesArray.category_name}</h1>
 
                     <p className="CategoryName text-sm ml-3 font-bold">Find Your Favrouite Electronic Itmes With Discount Like Phones,Laptops,Tablets etc.Here</p>

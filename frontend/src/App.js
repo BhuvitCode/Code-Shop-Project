@@ -17,6 +17,13 @@ import RetrieveSubCategoriesProps from './components/RetrieveApiProps/RetrieveSu
 
 import DisplayProducts from './components/DisplayProducts';
 import RetrieveProductsProps from './components/RetrieveApiProps/RetrieveProductsProps';
+import DisplaySpecificProduct from './components/DisplaySpecificProduct';
+import SignUp from './components/SignUp';
+import Login from './components/Login';
+import RegisterOrganization from './components/RegisterOrganization';
+import LoginOrganization from './components/LoginOrganization';
+import WishList from './components/WishList';
+import RetrieveProductSpecificProps from './components/RetrieveApiProps/RetrieveProductSpecificProps';
 function App() {
   return (
     <>
@@ -39,7 +46,31 @@ function App() {
           <Route exact path="/DisplayProducts/:CategoryIdentifier/:SubCat">
               <RetrieveProductsProps/>
           </Route>
-      </Switch>
+
+          <Route exact path="/DisplaySpecificProducts/:productId">
+              <RetrieveProductSpecificProps/>
+          </Route>
+
+          <Route exact path="/SignUp">
+              <SignUp/>
+          </Route>
+
+          <Route exact path="/Login">
+              <Login/>
+          </Route>
+
+          <Route exact path="/Seller/Site/OrgRegister">
+              <RegisterOrganization/>
+          </Route>
+
+          <Route exact path="/Seller/Site/OrgLogin">
+              <LoginOrganization/>
+          </Route>
+
+          <Route exact path="/WishList">
+              <WishList/>
+          </Route>
+      </Switch> 
     </ProductState>
   </Router>
 

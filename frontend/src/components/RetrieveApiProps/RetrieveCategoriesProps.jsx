@@ -9,8 +9,8 @@ const RetrieveCategoriesProps = () => {
 
     
     useEffect(() => {
-        GetCategories();
-    })
+        GetCategories()
+    },[])
 
 
 

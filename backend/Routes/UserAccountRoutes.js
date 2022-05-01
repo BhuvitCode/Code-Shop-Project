@@ -38,7 +38,7 @@ router.post('/SignUp', async (req, res) => {
         const SaveCreateAccount = await CreateAccount.save();
 
         const UserAuthToken =  Jwt.sign(AccountData,JWT_SIGNATURE) 
-        res.json({UserAuthToken});
+        res.json(UserAuthToken);
     }
 })
 
@@ -72,7 +72,7 @@ router.post('/Login', async (req, res) => {
     
         const UserAuthToken = Jwt.sign(AccountData,JWT_SIGNATURE)
     
-        res.json({UserAuthToken})
+        res.json(UserAuthToken)
         console.log({UserAuthToken})
     }
   

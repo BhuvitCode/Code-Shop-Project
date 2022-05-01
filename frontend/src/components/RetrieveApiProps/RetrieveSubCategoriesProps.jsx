@@ -18,7 +18,7 @@ const RetrieveCategoriesProps = () => {
 
             {SubCategories.map((SubCategoriesArray) => {
                 return <SubCategorie key={SubCategoriesArray._id} SubCategoriesArray={SubCategoriesArray}></SubCategorie>
-            })}
+            })} 
             
         </>
     )

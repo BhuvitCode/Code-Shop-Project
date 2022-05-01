@@ -24,6 +24,8 @@ import RegisterOrganization from './components/RegisterOrganization';
 import LoginOrganization from './components/LoginOrganization';
 import WishList from './components/WishList';
 import RetrieveProductSpecificProps from './components/RetrieveApiProps/RetrieveProductSpecificProps';
+import UserAccountInfo from './components/UserAccountInfo';
+import GetAccontProps from './components/RetrieveApiProps/GetAccontProps';
 function App() {
   return (
     <>
@@ -69,6 +71,10 @@ function App() {
 
           <Route exact path="/WishList">
               <WishList/>
+          </Route>
+
+          <Route exact path="/AccountInfo">
+              <GetAccontProps/>
           </Route>
       </Switch> 
     </ProductState>

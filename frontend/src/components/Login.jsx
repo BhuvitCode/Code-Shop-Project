@@ -6,7 +6,7 @@ const Login = () => {
     const PostLoginData = async () => {
         const {data} = await axios.post(`http://localhost:8000/api/v1/Authentication/Login`, {email: LoginDetails.email,password: LoginDetails.password},{headers: {'Content-Type': 'application/json'}});
 
-        console.log(data.UserAuthToken)
+        console.log(data.UserAuthToken) 
         localStorage.setItem('UserAuthenticationToken',data.UserAuthToken)
 
     }

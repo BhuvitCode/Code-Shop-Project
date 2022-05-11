@@ -1,0 +1,18 @@
+Hello I Am Ayush Gupta.I Had Started This Project 2 Months Back
+And I Had To Say That I Have Achieved Great Progress In This Project With Help Of Determination,Interest And My Passion For Web Development.I Have To Express My Gratitude Towards All The Content Creators On Youtube,Helpfull Blog And Of Course Stackoverflow :)
+Yeah If You Are Building A Project Stackoverflow Is Like A Key Element.So Lets Come To The Main Point Which Is What Are The Progresses That I Had Made?
+
+1.Created A Good UserInterface(UI)
+2.Created Required Functionallties That Are Essential For E-Commerce Store For Example:-
+Wishlist,Order System,Categories And Sub-Categories,Products Display System And Registration System For Major Categories OF User i.e.Seller And Normal User
+
+Yeah These Are The Features That Are Out On Our Plattform.
+
+You Might Be Wodering That Hey These Are The Very Basic Features But But Please Not That This The Pre-Alpha Release.Pre-Alpha Release Is The Earliest Release OF An Application.
+
+So Yeah This Is All That I Have To Mention.
+
+
+Thanks For Reading This :)
+
+Special Thanks To:- @CodeWithHarry,@Thapa Technical,@Stackoverflow

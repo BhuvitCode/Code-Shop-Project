@@ -2,6 +2,7 @@ const express = require('express');
 // const OrganizationMongooseModel = require('../models/OrganizationModel');
 const UserOrderPlacedModel = require('../models/UserOrderPlaced');
 const UserAccountModel = require('../models/UserAccount');
+const RedeemCodeModel = require('../Models/RedeemCodeModel');
 
 exports.PlaceOrder = async (req, res) => {
     const {NameOFProduct,ProductTotalPrice,ProductQuantity} = req.body
@@ -34,12 +35,54 @@ exports.PlaceOrder = async (req, res) => {
 }
 
 
+exports.PlaceOrderWithRedeemCode = async (req, res) => {
+    const {NameOFProduct,ProductTotalPrice,ProductQuantity,RedeemAmount} = req.body
+
+    UserId2 = req.AccountInfo.User_Id
+
+    const GetDetailsOFUser = await UserAccountModel.findById(UserId2).select('-password')
+    // OrganizationId = req.OrgInfo.Organization_Id
+
+    const DiscountedPrice = await RedeemCodeModel.findOne({Redeem_Code: req.body.RedeemCode})
+
+    const RedeemedPrice = ProductTotalPrice - DiscountedPrice.RedeemPrice
+
+    const CreateOrder = await new UserOrderPlacedModel({
+        user_id: UserId2,
+        NameOFProduct: req.params.ProductUniqueId,
+        ProductTotalPrice:RedeemedPrice,
+        ProductQuantity,
+        PhoneNumberOFUser: GetDetailsOFUser.PhoneNumber,
+        NameOFTheCountry: GetDetailsOFUser.Country,
+        NameOFTheState: GetDetailsOFUser.State,
+        NameOFTheCity: GetDetailsOFUser.City,
+        AddressOfTheUser: GetDetailsOFUser.Address,
+        Product_Brand_Name: 'zyz',
+        Product_Order_Status: 'Ordered',
+        colorOfTheProduct: req.body.colorOfTheProduct,
+        ModeOFPayment: req.body.mode
+        // colorOfTheProduct: req.body.colorOfTheProduct
+    })
+
+    const SaveCreateOrder = await CreateOrder.save();
+    res.json(SaveCreateOrder)
+    console.log(SaveCreateOrder)
+}
+
 exports.GetAllProductsToDelieverByTheBrand = async (req, res) => {
     BrandName = req.OrgInfo.Organization_Id
     
     const GetAllProductsOfTheBrand = await UserOrderPlacedModel.find({Product_Brand_Name: BrandName})
 
     res.json(GetAllProductsOfTheBrand)
+}
+
+exports.GetOrdersOFUsers = async (req, res) => {
+    UserId = req.AccountInfo.User_Id
+    
+    const OrdersOFUser = await UserOrderPlacedModel.find({user_id: UserId})
+
+    res.json(OrdersOFUser)
 }
 
 exports.UpdateProductStatus = async (req, res) => {
@@ -62,3 +105,4 @@ exports.UpdateProductStatus = async (req, res) => {
 
 
 }
+

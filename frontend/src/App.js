@@ -26,6 +26,11 @@ import WishList from './components/WishList';
 import RetrieveProductSpecificProps from './components/RetrieveApiProps/RetrieveProductSpecificProps';
 import UserAccountInfo from './components/UserAccountInfo';
 import GetAccontProps from './components/RetrieveApiProps/GetAccontProps';
+import OrdersPage from './components/OrdersPage';
+import RetrieveOrderProps from './components/RetrieveApiProps/RetrieveOrderProps';
+import RetrieveCartApiProps from './components/RetrieveApiProps/RetrieveCartApiProps';
+import RetrieveCouponCodeProps from './components/RetrieveApiProps/RetrieveCouponCodeProps';
+import RedeemCode from './components/RedeemCode';
 function App() {
   return (
     <>
@@ -51,6 +56,7 @@ function App() {
 
           <Route exact path="/DisplaySpecificProducts/:productId">
               <RetrieveProductSpecificProps/>
+              {/* <RetrieveCouponCodeProps/> */}
           </Route>
 
           <Route exact path="/SignUp">
@@ -70,12 +76,21 @@ function App() {
           </Route>
 
           <Route exact path="/WishList">
-              <WishList/>
+              <RetrieveCartApiProps/>
           </Route>
 
           <Route exact path="/AccountInfo">
               <GetAccontProps/>
           </Route>
+
+          <Route exact path="/OrdersPage">
+              <RetrieveOrderProps/>
+          </Route>
+
+          <Route exact path="/R/:productId2">
+              <RetrieveCouponCodeProps/>
+          </Route>
+
       </Switch> 
     </ProductState>
   </Router>

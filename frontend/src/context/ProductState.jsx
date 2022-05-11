@@ -2,6 +2,9 @@ import React,{useState,useEffect} from 'react';
 import product_context from './ProductsContext';
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
+import DisplaySpecificProduct from '../components/DisplaySpecificProduct';
+// import DisplaySpecificProduct from "components/DisplaySpecificProduct";
+
 // import { use } from '../../../backend/Routes/UserAccountRoutes';
 
 const ProductState = (props) => {
@@ -12,8 +15,10 @@ const ProductState = (props) => {
     const [Products,setProuducts] = useState(['No Value Fetched']);
     const [SpecificProduct,setSpecificProduct] = useState(['No Value Fetched']);
     const [AccountDetails,setAccountDetails] = useState(['']);
+    const [OrderDetails,setOrderDetails] = useState(['No Value Fetched']);
+    const [CartDetails,setCartDetails] = useState(['No Value Fetched']);
+    const [Code, setCode] = useState([])
 
-    const [first, setfirst] = useState("second")
     const GetCategories = async () => {
         const {data} = await axios.get('http://localhost:8000/api/v1/ProductApi/GetAllCategories');
         setCategories(data)
@@ -50,17 +55,44 @@ const OrderProduct = async (ProductIdentifier,qty,TotalPrice,color) => {
   console.log(data);
 }
 
+const OrderProductWithDiscount = async (ProductIdentifier2,qty2,TotalPrice2,color2) => {
+  const {data} = await axios.post(`http://localhost:8000/api/v1/ProductApi/PlaceOrderWithRedeemCode/${ProductIdentifier2}`, {ProductTotalPrice:TotalPrice2,RedeemCode:363465,ProductQuantity:qty2,colorOfTheProduct:color2,mode:'Cash'},{headers: {'Content-Type': 'application/json', 'Auth-Token':localStorage.getItem('UserAuthenticationToken')}});
+console.log(data);
+}
+
 const GetUserAccountInfo = async () => {
-  const {data} = await axios.post(`http://localhost:8000/api/v1/Authentication/GetAccountInfo`,{first},{headers: {'Content-Type': 'application/json', 'Auth-Token':localStorage.getItem('UserAuthenticationToken')}});
+  const {data} = await axios.post(`http://localhost:8000/api/v1/Authentication/GetAccountInfo`,{},{headers: {'Content-Type': 'application/json', 'Auth-Token':localStorage.getItem('UserAuthenticationToken')}});
   // console.log(data);
   setAccountDetails([data])
 }
 
-// console.log(AccountDetails);
-// console.log(localStorage.getItem("UserAuthenticationToken"));  
+const GetOrders = async () => {
+  const {data} = await axios.get(`http://localhost:8000/api/v1/ProductApi/GetOrdersOFTheUsers`,{headers: {'Content-Type': 'application/json', 'Auth-Token':localStorage.getItem('UserAuthenticationToken')}});
+  // console.log(data);
+  setOrderDetails(data)
+  console.log(OrderDetails);
+}
 
+const FetchWishListItems = async () => {
+  const {data} = await axios.post(`http://localhost:8000/api/v1/ProductApi/GetAllWishListItems`,{},{headers: {'Content-Type': 'application/json', 'Auth-Token':localStorage.getItem('UserAuthenticationToken')}});
+  // console.log(data);
+  setCartDetails(data)
+}
+
+const SearchCouponCode = async () => {
+  const {data} = await axios.post(`http://localhost:8000/api/v1/ProductApi/GetCouponCode`, {PriceReedemCode:363465},{headers: {'Content-Type': 'application/json'}});
+  console.log(data);
+  setCode(data)
+}
+
+// console.log(AccountDetails);
+console.log(localStorage.getItem("UserAuthenticationToken"));  
+
+  // {Code.map((CodeArray) => {
+  //           return <DisplaySpecificProduct CodeArray={CodeArray}></DisplaySpecificProduct>
+  //         })}
   return (  
-    <product_context.Provider value={{Categories,SubCategories,GetCategories,GetSubCategories,Products,GetAlProductsBySubCateAndCat,PostSignUpData,GetProductSpecificDetails,SpecificProduct,OrderProduct,AccountDetails,GetUserAccountInfo}}>
+    <product_context.Provider value={{Categories,SubCategories,GetCategories,GetSubCategories,Products,GetAlProductsBySubCateAndCat,PostSignUpData,GetProductSpecificDetails,SpecificProduct,OrderProduct,AccountDetails,GetUserAccountInfo,GetOrders,OrderDetails,FetchWishListItems,CartDetails,Code,SearchCouponCode,OrderProductWithDiscount}}>
             
     {props.children}
 

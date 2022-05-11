@@ -6,6 +6,7 @@ const Sub_Category_Model = require('../Models/Sub-Category');
 const ReviewMongooseModel = require('../Models/ReiviewModel');
 const ColorMongooseModel = require('../Models/ColorModel');
 const WishlistMongooseModel = require('../Models/WishlistModel');
+const RedeemCodeModel = require('../Models/RedeemCodeModel');
 // const OrganizationMongooseModel = require('../Models/OrganizationModel');
 exports.GetAllProducts = async (req, res) => {
     const GetAllProducts = await ProductModal.find({product_Category: req.params.CatSlug, product_sub_category:req.params.SubCategorySlug}).select(
@@ -198,21 +199,21 @@ exports.GetColotsByProductId = async (req,res)=>{
 exports.AddToWishList = async (req,res)=>{
     const GetProductId = req.params.ProductIdPrameter;
     
-    const FindProductDetails = await ProductModal.findById(GetProductId).select('product_name');
+    const FindProductDetails = await ProductModal.findById(GetProductId);
 
     const AddToWishList = new WishlistMongooseModel({
         User_Name:req.AccountInfo.User_Id,
         Product_Identfier:GetProductId,
         Product_Name:FindProductDetails.product_name,
-        Product_Price:req.body.Product_Price,
-        Product_Image_Url:req.body.Product_Image_Url,
-        Product_Stock:req.body.Product_Stock,
-        Product_Desc:req.body.Product_Desc,
+        Product_Price:FindProductDetails.product_price,
+        Product_Image_Url:FindProductDetails.product_image_url,
+        Product_Stock:req.body.CartQty,
+        Product_Desc:FindProductDetails.product_Desc,
     })
 
     const SaveAddToWishList = await AddToWishList.save();
     res.json(SaveAddToWishList);
-    
+    console.log(SaveAddToWishList);
 }
 
 
@@ -223,4 +224,24 @@ exports.GetWishListItems = async (req,res)=>{
     const GetWishListItemsByUserId = await WishlistMongooseModel.find({User_Name: req.AccountInfo.User_Id});
     
     res.json(GetWishListItemsByUserId);
+}
+
+exports.GenerateCouponCode = async (req,res)=>{
+    const RandomNumber = Math.floor(Math.random() * 1000000 + 1);
+
+    const CreateCode = await new RedeemCodeModel({
+        RedeemNumber:RandomNumber,
+        RedeemPrice:req.body.CouponCodePrice,
+    })
+
+    const SaveCode = await CreateCode.save();
+
+    res.json(SaveCode);
+}
+
+exports.GetReedemCodes = async (req,res)=>{
+    const {PriceReedemCode} = req.body;
+    const GetRedeemCodes = await RedeemCodeModel.find({RedeemNumber:PriceReedemCode});
+
+    res.json(GetRedeemCodes)
 }

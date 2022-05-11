@@ -1,14 +1,16 @@
 const express = require('express');
 const router = express.Router();
 // const { body, validationResult } = require('express-validator');
-const { CreateProduct,GetAllProducts,GetFullProductDetailsById,UpdateProduct,DeleteProduct,CreateCategory,CreateSubCategory,GetAllSubCategories,SumbitReview,GetAllReviewsOfAProduct,AddAColor,GetColotsByProductId,AddToWishList, GetWishListItems,GetAllCategories} = require('../Controllers/ProductControllers');
+const { CreateProduct,GetAllProducts,GetFullProductDetailsById,UpdateProduct,DeleteProduct,CreateCategory,CreateSubCategory,GetAllSubCategories,SumbitReview,GetAllReviewsOfAProduct,AddAColor,GetColotsByProductId,AddToWishList, GetWishListItems,GetAllCategories,GenerateCouponCode,GetReedemCodes} = require('../Controllers/ProductControllers');
+
+// const {GetOrdersOFUsers} = require('../Controllers/ProductControllers');
 // const FetchOrgInfoUsingToken = require('../middlewares/FetchOrgInfo')
 // const OrganizationMongooseModel = require('../models/OrganizationModel');
 
 const FetchUserInfoUsingAuthToken = require('../middlewares/UserInfo');
 
 
-const {PlaceOrder,GetAllProductsToDelieverByTheBrand,UpdateProductStatus} = require('../Controllers/OrderController');
+const {PlaceOrder,GetAllProductsToDelieverByTheBrand,UpdateProductStatus,GetOrdersOFUsers,PlaceOrderWithRedeemCode} = require('../Controllers/OrderController');
 const FetchOrgInfoUsingToken = require('../middlewares/FetchOrgInfo')
 
 // const GetAllProductsToDelieverByTheBrand = require('../Controllers/OrderProcessingController')
@@ -37,6 +39,13 @@ router.route('/AddToWishList/:ProductIdPrameter').post(FetchUserInfoUsingAuthTok
 
 router.route('/GetAllWishListItems').post(FetchUserInfoUsingAuthToken,GetWishListItems);
 
+router.route('/GetOrdersOFTheUsers').get(FetchUserInfoUsingAuthToken,GetOrdersOFUsers)
+
+router.route('/GenerateRedeemCode').post(GenerateCouponCode)
+
+router.route('/GetCouponCode').post(GetReedemCodes)
+
+router.route('/PlaceOrderWithRedeemCode/:ProductUniqueId').post(FetchUserInfoUsingAuthToken,PlaceOrderWithRedeemCode)
 
 // UpdateProductStatus
 module.exports = router

@@ -9,7 +9,7 @@ const WishListSchema = new Schema({
     },
 
     Product_Identfier:{
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     },
 

@@ -7,6 +7,7 @@ const ReviewMongooseModel = require('../Models/ReiviewModel');
 const ColorMongooseModel = require('../Models/ColorModel');
 const WishlistMongooseModel = require('../Models/WishlistModel');
 const RedeemCodeModel = require('../Models/RedeemCodeModel');
+const RedeemPointMongooseModel = require('../Models/RedeemPointsModel');
 // const OrganizationMongooseModel = require('../Models/OrganizationModel');
 exports.GetAllProducts = async (req, res) => {
     const GetAllProducts = await ProductModal.find({product_Category: req.params.CatSlug, product_sub_category:req.params.SubCategorySlug}).select(

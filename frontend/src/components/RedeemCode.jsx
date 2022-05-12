@@ -6,6 +6,7 @@ import axios from 'axios'
 
 const RedeemCode = (props) => {
     const {SpecificProductArray,CodeArray} = props;
+    const [DiscountCode, setDiscountCode] = useState({ CouponCode: ""})
 
   const GetContext = useContext(product_context)
 
@@ -15,6 +16,11 @@ const RedeemCode = (props) => {
   const [Quantity, setQuantity] = useState(0)
   const [Price, setPrice] = useState(SpecificProductArray.product_price)
 
+  const onchange = (e) => {
+    // e.preventDefault()
+    setDiscountCode({ ...DiscountCode, [e.target.name]: e.target.value })
+}
+
   const IncrementQty = ()=>{
     setQuantity(Quantity+1)
     setPrice(SpecificProductArray.product_price*Quantity)
@@ -22,7 +28,7 @@ const RedeemCode = (props) => {
 
   const BuyNow = (e)=>{
     e.preventDefault()
-    OrderProduct(productId2,Quantity,Price,'Red')
+    OrderProduct(productId2,Quantity,Price,'Red',DiscountCode.CouponCode)
     alert("Sign Up Successfully")
   }
 
@@ -99,6 +105,11 @@ const RedeemCode = (props) => {
                     <button className='mt-3 bg-black text-white px-2 py-2 rounded-lg ml-3' onClick={BuyDiscountedProduct}
                      
                     >Redeem</button>
+
+<div class="relative mb-4">
+        <label for="email" class="leading-7 text-sm text-gray-600">Redeem Code</label>
+        <input type="text" id="CouponCode" name="CouponCode" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" onChange={onchange}/>
+      </div>
                     
 
                     <div className="Review-Section">

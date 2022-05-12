@@ -3,7 +3,7 @@ const express = require('express');
 const UserOrderPlacedModel = require('../models/UserOrderPlaced');
 const UserAccountModel = require('../models/UserAccount');
 const RedeemCodeModel = require('../Models/RedeemCodeModel');
-
+const RedeemPointMongooseModel = require('../Models/RedeemPointsModel');
 exports.PlaceOrder = async (req, res) => {
     const {NameOFProduct,ProductTotalPrice,ProductQuantity} = req.body
 
@@ -63,6 +63,42 @@ exports.PlaceOrderWithRedeemCode = async (req, res) => {
         ModeOFPayment: req.body.mode
         // colorOfTheProduct: req.body.colorOfTheProduct
     })
+
+    const GetTotalRedeemPoints = await RedeemPointMongooseModel.findOne({User_Id: UserId2})
+    const AddRedeemPointsWithTotal = GetTotalRedeemPoints.TotalRedeemPoints + 5
+    if(!GetTotalRedeemPoints){
+        const addRedeemPoints = await new RedeemPointMongooseModel({
+            User_Id: UserId2,
+            TotalRedeemPoints: 5
+        })
+
+        const SaveAddRedeemPoints = await addRedeemPoints.save();
+    }
+
+    
+    if(GetTotalRedeemPoints){
+        // const addRedeemPoints = await new RedeemPointMongooseModel({
+        //     User_Id: UserId2,
+        //     TotalRedeemPoints:AddRedeemPointsWithTotal
+        // })
+
+        // const UpdateRedeemPoints = await RedeemPointMongooseModel.findByIdAndUpdate(UserId2,{
+        //     $set:{
+        //         User_Id: UserId2,
+        //         TotalRedeemPoints:AddRedeemPointsWithTotal
+        //     }
+        // });
+
+        const UpdateRedeemPoints = await RedeemPointMongooseModel.updateOne({User_Id:UserId2},{
+                $set:{
+                    User_Id: UserId2,
+                    TotalRedeemPoints:AddRedeemPointsWithTotal
+                }
+            })
+        
+        const find = await RedeemPointMongooseModel.find({User_Id: UserId2})
+        console.log(find);
+    }
 
     const SaveCreateOrder = await CreateOrder.save();
     res.json(SaveCreateOrder)

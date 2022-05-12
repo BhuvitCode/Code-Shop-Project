@@ -55,8 +55,8 @@ const OrderProduct = async (ProductIdentifier,qty,TotalPrice,color) => {
   console.log(data);
 }
 
-const OrderProductWithDiscount = async (ProductIdentifier2,qty2,TotalPrice2,color2) => {
-  const {data} = await axios.post(`http://localhost:8000/api/v1/ProductApi/PlaceOrderWithRedeemCode/${ProductIdentifier2}`, {ProductTotalPrice:TotalPrice2,RedeemCode:363465,ProductQuantity:qty2,colorOfTheProduct:color2,mode:'Cash'},{headers: {'Content-Type': 'application/json', 'Auth-Token':localStorage.getItem('UserAuthenticationToken')}});
+const OrderProductWithDiscount = async (ProductIdentifier2,qty2,TotalPrice2,color2,RedeemCouponCode) => {
+  const {data} = await axios.post(`http://localhost:8000/api/v1/ProductApi/PlaceOrderWithRedeemCode/${ProductIdentifier2}`, {ProductTotalPrice:TotalPrice2,RedeemCode:RedeemCouponCode,ProductQuantity:qty2,colorOfTheProduct:color2,mode:'Cash'},{headers: {'Content-Type': 'application/json', 'Auth-Token':localStorage.getItem('UserAuthenticationToken')}});
 console.log(data);
 }
 

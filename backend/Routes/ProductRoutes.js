@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // const { body, validationResult } = require('express-validator');
-const { CreateProduct,GetAllProducts,GetFullProductDetailsById,UpdateProduct,DeleteProduct,CreateCategory,CreateSubCategory,GetAllSubCategories,SumbitReview,GetAllReviewsOfAProduct,AddAColor,GetColotsByProductId,AddToWishList, GetWishListItems,GetAllCategories,GenerateCouponCode,GetReedemCodes} = require('../Controllers/ProductControllers');
+const { CreateProduct,GetAllProducts,GetFullProductDetailsById,UpdateProduct,DeleteProduct,CreateCategory,CreateSubCategory,GetAllSubCategories,SumbitReview,GetAllReviewsOfAProduct,AddAColor,GetColotsByProductId,AddToWishList, GetWishListItems,GetAllCategories,GenerateCouponCode,GetReedemCodes,CreateLuckyDrawItems,GetLuckyItem} = require('../Controllers/ProductControllers');
 
 // const {GetOrdersOFUsers} = require('../Controllers/ProductControllers');
 // const FetchOrgInfoUsingToken = require('../middlewares/FetchOrgInfo')
@@ -46,6 +46,10 @@ router.route('/GenerateRedeemCode').post(GenerateCouponCode)
 router.route('/GetCouponCode').post(GetReedemCodes)
 
 router.route('/PlaceOrderWithRedeemCode/:ProductUniqueId').post(FetchUserInfoUsingAuthToken,PlaceOrderWithRedeemCode)
+
+router.route('/CreateLuckyItems').post(CreateLuckyDrawItems)
+
+router.route('/GetLuckyItems').get(GetLuckyItem)
 
 // UpdateProductStatus
 module.exports = router

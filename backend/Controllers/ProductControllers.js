@@ -8,6 +8,7 @@ const ColorMongooseModel = require('../Models/ColorModel');
 const WishlistMongooseModel = require('../Models/WishlistModel');
 const RedeemCodeModel = require('../Models/RedeemCodeModel');
 const RedeemPointMongooseModel = require('../Models/RedeemPointsModel');
+const LuckySpinMongooseModel = require('../Models/LuckySpinModel');
 // const OrganizationMongooseModel = require('../Models/OrganizationModel');
 exports.GetAllProducts = async (req, res) => {
     const GetAllProducts = await ProductModal.find({product_Category: req.params.CatSlug, product_sub_category:req.params.SubCategorySlug}).select(
@@ -230,14 +231,36 @@ exports.GetWishListItems = async (req,res)=>{
 exports.GenerateCouponCode = async (req,res)=>{
     const RandomNumber = Math.floor(Math.random() * 1000000 + 1);
 
-    const CreateCode = await new RedeemCodeModel({
-        RedeemNumber:RandomNumber,
-        RedeemPrice:req.body.CouponCodePrice,
-    })
+    if(req.body.GenerationMethod = "Points"){
+        const {NoOFPoints} = req.body;
 
-    const SaveCode = await CreateCode.save();
+        const CalculatePointsAmount = NoOFPoints * 5;
 
-    res.json(SaveCode);
+        const CreateCodeWithPoints = await new RedeemCodeModel({
+            RedeemNumber:RandomNumber,
+            RedeemPrice:CalculatePointsAmount,
+        })
+    
+        const SaveCreateCodeWithPoints = await CreateCodeWithPoints.save();
+    
+        res.json(SaveCreateCodeWithPoints);
+
+    }
+
+    else{
+
+        const CreateCode = await new RedeemCodeModel({
+            RedeemNumber:RandomNumber,
+            RedeemPrice:req.body.CouponCodePrice,
+        })
+    
+        const SaveCode = await CreateCode.save();
+    
+        res.json(SaveCode);
+
+    }
+
+
 }
 
 exports.GetReedemCodes = async (req,res)=>{
@@ -245,4 +268,24 @@ exports.GetReedemCodes = async (req,res)=>{
     const GetRedeemCodes = await RedeemCodeModel.find({RedeemNumber:PriceReedemCode});
 
     res.json(GetRedeemCodes)
+}
+
+exports.CreateLuckyDrawItems = async (req,res)=>{
+    const {LuckyItem,LuckyNumber} = req.body;
+
+    const AddLuckyDrawItem = new LuckySpinMongooseModel({
+        LuckyItem,
+        LuckyNumber
+    })
+
+    const SaveLuckyDrawItem = await AddLuckyDrawItem.save();
+
+    res.json(SaveLuckyDrawItem);
+}
+
+exports.GetLuckyItem = async (req,res)=>{
+    const GenerateRandomNumber = Math.floor(Math.random() * 5 + 1);
+    const GetLuckyItem = await LuckySpinMongooseModel.find({LuckyNumber: GenerateRandomNumber});
+
+    res.json(GetLuckyItem);
 }

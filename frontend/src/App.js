@@ -31,6 +31,7 @@ import RetrieveOrderProps from './components/RetrieveApiProps/RetrieveOrderProps
 import RetrieveCartApiProps from './components/RetrieveApiProps/RetrieveCartApiProps';
 import RetrieveCouponCodeProps from './components/RetrieveApiProps/RetrieveCouponCodeProps';
 import RedeemCode from './components/RedeemCode';
+import LuckWheel from './components/LuckWheel';
 function App() {
   return (
     <>
@@ -89,6 +90,10 @@ function App() {
 
           <Route exact path="/R/:productId2">
               <RetrieveCouponCodeProps/>
+          </Route>
+
+          <Route exact path="/LuckySpin">
+              <LuckWheel/>
           </Route>
 
       </Switch> 

@@ -283,6 +283,7 @@ exports.CreateLuckyDrawItems = async (req,res)=>{
     res.json(SaveLuckyDrawItem);
 }
 
+
 exports.GetLuckyItem = async (req,res)=>{
     const GenerateRandomNumber = Math.floor(Math.random() * 5 + 1);
     const GetLuckyItem = await LuckySpinMongooseModel.find({LuckyNumber: GenerateRandomNumber});
